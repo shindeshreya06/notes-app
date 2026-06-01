@@ -55,9 +55,7 @@
     font-weight: 800;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
-    background: linear-gradient(to right, #ffffff, #c8d9e6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
     display: inline-block;
 }
 

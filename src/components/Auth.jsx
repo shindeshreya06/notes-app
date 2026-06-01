@@ -26,7 +26,7 @@ function Auth({ onLogin }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        
+
         const trimmedUsername = username.trim();
         if (!trimmedUsername) {
             showFeedback('Username cannot be empty');
@@ -85,7 +85,7 @@ function Auth({ onLogin }) {
             localStorage.setItem('notes_app_users', JSON.stringify(users));
 
             showFeedback('Account created successfully! Logging in...', 'success');
-            
+
             // Automatically log in the user after 1.5 seconds
             setTimeout(() => {
                 onLogin(newUser);
@@ -99,8 +99,8 @@ function Auth({ onLogin }) {
                 <div className="auth-header">
                     <div className="auth-logo">📝 MyNotes</div>
                     <div className="auth-subtitle">
-                        {isLoginTab 
-                            ? 'Capture your thoughts, secure and private.' 
+                        {isLoginTab
+                            ? 'Capture your thoughts, secure and private.'
                             : 'Create an account to start writing notes.'
                         }
                     </div>
@@ -108,14 +108,14 @@ function Auth({ onLogin }) {
 
                 <div className={`auth-tabs ${!isLoginTab ? 'signup-active' : ''}`}>
                     <div className="auth-tab-slider"></div>
-                    <button 
+                    <button
                         type="button"
                         className={`auth-tab-btn ${isLoginTab ? 'active' : ''}`}
                         onClick={() => handleTabChange(true)}
                     >
                         Login
                     </button>
-                    <button 
+                    <button
                         type="button"
                         className={`auth-tab-btn ${!isLoginTab ? 'active' : ''}`}
                         onClick={() => handleTabChange(false)}
