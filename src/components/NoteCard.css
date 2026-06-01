@@ -1,0 +1,153 @@
+.note-card {
+    position: relative;
+    background-color: #C8D9E6;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 2px 4px 10px rgba(47, 65, 86, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease;
+    min-height: 180px;
+}
+
+.note-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 8px 16px rgba(47, 65, 86, 0.15);
+}
+
+.note-card h3 {
+    font-size: 1rem;
+    color: #2F4156;
+    font-weight: 700;
+    padding-right: 24px; /* Leave space for pin button */
+}
+
+.note-card p {
+    font-size: 0.88rem;
+    color: #3d5166;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.note-timestamp {
+    font-size: 0.75rem;
+    color: #567C8D;
+}
+
+.note-card-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.delete-btn {
+    padding: 5px 14px;
+    background-color: #2F4156;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #e05555;
+}
+
+.edit-btn {
+    padding: 5px 14px;
+    background-color: #567C8D;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.edit-btn:hover {
+    background-color: #3d6070;
+}
+
+.delete-btn,
+.edit-btn {
+    width: auto;
+}
+
+.archive-btn {
+    padding: 5px 14px;
+    background-color: #567C8D;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    width: auto;
+}
+
+.archive-btn:hover {
+    background-color: #2F4156;
+}
+
+/* Card Theme Backgrounds */
+.note-card.theme-default {
+    background-color: #C8D9E6;
+}
+
+.note-card.theme-lavender {
+    background-color: #E8E0FA;
+}
+
+.note-card.theme-mint {
+    background-color: #E0F4F0;
+}
+
+.note-card.theme-peach {
+    background-color: #FCEEE3;
+}
+
+.note-card.theme-rose {
+    background-color: #FCEBF0;
+}
+
+.note-card.theme-ocean {
+    background-color: #E3EEFC;
+}
+
+/* Pin Button Styling */
+.pin-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: all 0.2s ease;
+    user-select: none;
+    padding: 0;
+    line-height: 1;
+}
+
+.pin-btn:hover {
+    opacity: 1;
+    transform: scale(1.25) rotate(-15deg);
+}
+
+.pin-btn.pinned {
+    opacity: 1;
+    transform: scale(1.25);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* Pinned Note Highlight */
+.note-card.pinned-card {
+    box-shadow: 0 6px 14px rgba(47, 65, 86, 0.1), inset 0 3px 0 #567C8D;
+}
