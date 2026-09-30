@@ -1,6 +1,6 @@
 # 📝 MyNotes App
 
-A full-featured, responsive notes application built with React and JavaScript. Users can create, edit, delete, archive, pin and search notes — all with per-user authentication and localStorage persistence.
+A full-featured, responsive notes application built with React and a Node.js/Express backend. Users can create, edit, delete, archive, pin and search notes — all with per-user authentication, JWT-based sessions, and MongoDB persistence.
 
 ---
 
@@ -9,18 +9,17 @@ A full-featured, responsive notes application built with React and JavaScript. U
 > https://notes-app-kappa-three-59.vercel.app
 
 ---
-<<<<<<< HEAD
 
 ## ✨ Features
 
-- 🔐 **Authentication** — Login and Signup with per-user data isolation
+- 🔐 **Authentication** — Login and Signup with JWT-based sessions and per-user data isolation
 - 📝 **Add Notes** — Create notes with title and content
 - ✏️ **Edit Notes** — Update existing notes inline
 - 🗑️ **Soft Delete** — Deleted notes move to Archive
 - 🗂️ **Archive** — Restore or permanently delete archived notes
 - 📌 **Pin Notes** — Pinned notes appear at the top
 - 🔍 **Search** — Real-time search by note title
-- 💾 **Persistence** — Notes saved to localStorage per user
+- 💾 **Persistence** — Notes stored in MongoDB, tied to each user's account
 - 📱 **Responsive** — Works on all screen sizes
 
 ---
@@ -30,36 +29,47 @@ A full-featured, responsive notes application built with React and JavaScript. U
 | Technology | Purpose |
 |---|---|
 | React 18 | Frontend UI framework |
-| JavaScript (ES6+) | Core logic |
 | Vite | Build tool and dev server |
 | CSS3 | Styling and animations |
-| localStorage | Data persistence |
+| Node.js + Express | Backend REST API |
+| MongoDB + Mongoose | Database and data modeling |
+| JWT | Authentication tokens |
+| bcryptjs | Password hashing |
 
 ---
 
 ## 📁 Project Structure
-
-```
 notes-app/
 ├── public/
 ├── src/
-│   ├── components/
-│   │   ├── Auth.jsx        # Login and Signup
-│   │   ├── Auth.css
-│   │   ├── NoteForm.jsx    # Add and Edit note form
-│   │   ├── NoteForm.css
-│   │   ├── NoteList.jsx    # List of all notes
-│   │   ├── NoteList.css
-│   │   ├── NoteCard.jsx    # Individual note card
-│   │   └── NoteCard.css
-│   ├── App.jsx             # Main app component
-│   ├── App.css
-│   ├── main.jsx
-│   └── index.css
+│ ├── components/
+│ │ ├── Auth.jsx # Login and Signup
+│ │ ├── Auth.css
+│ │ ├── NoteForm.jsx # Add and Edit note form
+│ │ ├── NoteForm.css
+│ │ ├── NoteList.jsx # List of all notes
+│ │ ├── NoteList.css
+│ │ ├── NoteCard.jsx # Individual note card
+│ │ └── NoteCard.css
+│ ├── api.js # API request helper
+│ ├── App.jsx # Main app component
+│ ├── App.css
+│ ├── main.jsx
+│ └── index.css
+├── server/
+│ ├── models/
+│ │ ├── User.js
+│ │ └── Note.js
+│ ├── routes/
+│ │ ├── auth.js
+│ │ └── notes.js
+│ ├── middleware/
+│ │ └── auth.js
+│ └── server.js
 ├── index.html
 ├── package.json
 └── vite.config.js
-```
+
 
 ---
 
@@ -68,148 +78,46 @@ notes-app/
 ### Prerequisites
 - Node.js 18+
 - npm
+- A MongoDB Atlas account (or local MongoDB)
 
-### Installation
+### Frontend
 
 ```bash
-# Clone the repository
 git clone https://github.com/shindeshreya06/notes-app.git
-
-# Navigate to project folder
 cd notes-app
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
----
-
-## 🔐 Authentication
-
-This app uses **localStorage-based authentication** for frontend-only deployment.
-
-- Each user's notes are stored separately under their username key
-- Passwords are stored in plain text locally (acceptable for frontend-only projects)
-- In a production app, passwords would be hashed using bcrypt on a Node.js backend
-
----
-
-## 📸 Screenshots
- 
-### Login Page
-![Login Page](src\assets\loginpage.png)
- 
-### Sign Up Page
-![Sign Up Page](src\assets\signuppage.png)
- 
-### Dashboard — All Notes
-![Dashboard](src\assets\dashboard.png)
- 
-### Archive Page
-![Archive](src\assets\archive.png)
-
----
-
-## 🔮 Future Improvements
-
-- [ ] Node.js + Express backend
-- [ ] MongoDB database integration
-- [ ] JWT-based secure authentication
-- [ ] Password hashing with bcrypt
-- [ ] Note color themes
-- [ ] Rich text editor
-=======
-
-## ✨ Features
-
-- 🔐 **Authentication** — Login and Signup with per-user data isolation
-- 📝 **Add Notes** — Create notes with title and content
-- ✏️ **Edit Notes** — Update existing notes inline
-- 🗑️ **Soft Delete** — Deleted notes move to Archive
-- 🗂️ **Archive** — Restore or permanently delete archived notes
-- 📌 **Pin Notes** — Pinned notes appear at the top
-- 🔍 **Search** — Real-time search by note title
-- 💾 **Persistence** — Notes saved to localStorage per user
-- 📱 **Responsive** — Works on all screen sizes
-
----
-
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|---|---|
-| React 18 | Frontend UI framework |
-| JavaScript (ES6+) | Core logic |
-| Vite | Build tool and dev server |
-| CSS3 | Styling and animations |
-| localStorage | Data persistence |
-
----
-
-## 📁 Project Structure
-
-```
-notes-app/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Auth.jsx        # Login and Signup
-│   │   ├── Auth.css
-│   │   ├── NoteForm.jsx    # Add and Edit note form
-│   │   ├── NoteForm.css
-│   │   ├── NoteList.jsx    # List of all notes
-│   │   ├── NoteList.css
-│   │   ├── NoteCard.jsx    # Individual note card
-│   │   └── NoteCard.css
-│   ├── App.jsx             # Main app component
-│   ├── App.css
-│   ├── main.jsx
-│   └── index.css
-├── index.html
-├── package.json
-└── vite.config.js
-```
-
----
-
-## ⚙️ Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm
-
-### Installation
+### Backend
 
 ```bash
-# Clone the repository
-git clone https://github.com/shindeshreya06/notes-app.git
-
-# Navigate to project folder
-cd notes-app
-
-# Install dependencies
+cd server
 npm install
+```
 
-# Start development server
+Create a `.env` file in `server/`:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_long_random_secret
+PORT=5000
+
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+The API runs at `http://localhost:5000/api`.
 
 ---
 
 ## 🔐 Authentication
 
-This app uses **localStorage-based authentication** for frontend-only deployment.
-
-- Each user's notes are stored separately under their username key
-- Passwords are stored in plain text locally (acceptable for frontend-only projects)
-- In a production app, passwords would be hashed using bcrypt on a Node.js backend
+- Passwords are hashed with **bcrypt** before being stored — never saved in plain text
+- Login issues a **JWT** valid for 7 days, sent with every request via the `Authorization: Bearer <token>` header
+- Each note is tied to its owner's user ID in MongoDB, so users can only access their own notes
 
 ---
 
@@ -231,12 +139,7 @@ This app uses **localStorage-based authentication** for frontend-only deployment
 
 ## 🔮 Future Improvements
 
-- [ ] Node.js + Express backend
-- [ ] MongoDB database integration
-- [ ] JWT-based secure authentication
-- [ ] Password hashing with bcrypt
 - [ ] Note color themes
 - [ ] Rich text editor
-
->>>>>>> 2d9cf88b92528ff92657320f1254fcd95630b4e
-
+- [ ] httpOnly cookie-based auth instead of localStorage token
+- [ ] Tags/categories for notes
