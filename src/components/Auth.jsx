@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiRequest } from '../api';
 import './Auth.css';
 
 function Auth({ onLogin }) {
@@ -10,7 +11,6 @@ function Auth({ onLogin }) {
 
     function showFeedback(text, type = 'error') {
         setMessage({ text, type });
-        // Auto clear error message after 5 seconds
         setTimeout(() => {
             setMessage(prev => prev.text === text ? { text: '', type: '' } : prev);
         }, 5000);
@@ -24,7 +24,7 @@ function Auth({ onLogin }) {
         setMessage({ text: '', type: '' });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const trimmedUsername = username.trim();
@@ -32,64 +32,46 @@ function Auth({ onLogin }) {
             showFeedback('Username cannot be empty');
             return;
         }
-
         if (!password) {
             showFeedback('Password cannot be empty');
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('notes_app_users') || '[]');
+        try {
+            if (isLoginTab) {
+                const data = await apiRequest('/auth/login', {
+                    method: 'POST',
+                    body: { username: trimmedUsername, password },
+                });
+                onLogin({ username: data.username, token: data.token });
+            } else {
+                if (password.length < 4) {
+                    showFeedback('Password must be at least 4 characters long');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    showFeedback('Passwords do not match');
+                    return;
+                }
 
-        if (isLoginTab) {
-            // Login logic
-            const foundUser = users.find(
-                (user) => user.username.toLowerCase() === trimmedUsername.toLowerCase()
-            );
+                await apiRequest('/auth/signup', {
+                    method: 'POST',
+                    body: { username: trimmedUsername, password },
+                });
 
-            if (!foundUser || foundUser.password !== password) {
-                showFeedback('Invalid username or password');
-                return;
+                showFeedback('Account created successfully! Logging in...', 'success');
+
+                // Signup doesn't return a token, so log in right after
+                const data = await apiRequest('/auth/login', {
+                    method: 'POST',
+                    body: { username: trimmedUsername, password },
+                });
+                setTimeout(() => {
+                    onLogin({ username: data.username, token: data.token });
+                }, 1200);
             }
-
-            // Successful Login
-            onLogin(foundUser);
-        } else {
-            // Sign Up logic
-            if (password.length < 4) {
-                showFeedback('Password must be at least 4 characters long');
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                showFeedback('Passwords do not match');
-                return;
-            }
-
-            const userExists = users.some(
-                (user) => user.username.toLowerCase() === trimmedUsername.toLowerCase()
-            );
-
-            if (userExists) {
-                showFeedback('Username already exists');
-                return;
-            }
-
-            // Create new user
-            const newUser = {
-                id: Date.now().toString(),
-                username: trimmedUsername,
-                password: password // In a real production app, we would hash this, but locally plain text is standard
-            };
-
-            users.push(newUser);
-            localStorage.setItem('notes_app_users', JSON.stringify(users));
-
-            showFeedback('Account created successfully! Logging in...', 'success');
-
-            // Automatically log in the user after 1.5 seconds
-            setTimeout(() => {
-                onLogin(newUser);
-            }, 1200);
+        } catch (err) {
+            showFeedback(err.message);
         }
     }
 

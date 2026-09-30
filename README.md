@@ -238,5 +238,5 @@ This app uses **localStorage-based authentication** for frontend-only deployment
 - [ ] Note color themes
 - [ ] Rich text editor
 
->>>>>>> 2d9cf88b92528ff92657320f1254fcd95630b4e1
+>>>>>>> 2d9cf88b92528ff92657320f1254fcd95630b4e
 
