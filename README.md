@@ -39,6 +39,7 @@ A full-featured, responsive notes application built with React and a Node.js/Exp
 ---
 
 ## 📁 Project Structure
+```text
 notes-app/
 ├── public/
 ├── src/
@@ -69,6 +70,7 @@ notes-app/
 ├── index.html
 ├── package.json
 └── vite.config.js
+```
 
 
 ---
