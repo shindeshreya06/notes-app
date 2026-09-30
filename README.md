@@ -6,7 +6,7 @@ A full-featured, responsive notes application built with React and a Node.js/Exp
 
 ## 🚀 Live Demo
 
-> https://notes-app-kappa-three-59.vercel.app
+> https://notes-app-taupe-two.vercel.app
 
 ---
 

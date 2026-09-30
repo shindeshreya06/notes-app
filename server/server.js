@@ -7,7 +7,9 @@ const notesRoutes = require('./routes/notes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://notes-app-taupe-two.vercel.app'],
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
